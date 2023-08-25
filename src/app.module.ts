@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './components/users/user.module.js';
 import { sslHelper } from './utils/typeorm.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+import { UserModule } from './modules/users/user.module.js';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AppService } from './app.service.js';
       // entities: mainModels,
       // migrations: mainMigrations
     }),
+    AuthModule,
     UserModule,
   ],
   controllers: [AppController],

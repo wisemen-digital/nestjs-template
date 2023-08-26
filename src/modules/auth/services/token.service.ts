@@ -107,7 +107,7 @@ export class TokenService {
         }
       })
 
-      if (refreshToken === undefined || refreshToken === null) return false
+      if (refreshToken == null) return false
 
       return refreshToken
     } catch (e) {

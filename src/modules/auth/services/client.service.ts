@@ -44,11 +44,11 @@ export class ClientService {
         where: { uuid: clientId }
       })
 
-      if (client === null || client === undefined) {
+      if (client == null) {
         return false
       }
 
-      if ((secret !== null && secret !== undefined) && client?.secret !== secret) {
+      if (secret == null && client?.secret !== secret) {
         return false
       }
 

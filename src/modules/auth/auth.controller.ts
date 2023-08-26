@@ -1,7 +1,7 @@
 import { Controller, Post, Req, Res } from '@nestjs/common'
 import { OAuth2Server, createOAuth2 } from '@appwise/oauth2-server'
 import { UserService } from '../users/user.service.js'
-import { ClientService } from './services/client.service.js'
+import { ClientService, Scope, scopes } from './services/client.service.js'
 import { TokenService } from './services/token.service.js'
 import { AuthTransformer, AuthTransformerType } from './auth.transformer.js'
 import { Response } from 'express'
@@ -16,7 +16,7 @@ export class AuthController {
     private tokenService: TokenService
   ) {
     this.oauth = createOAuth2({
-      scopes: [],
+      scopes: scopes,
       services: {
         userService: this.userService,
         clientService: this.clientService,

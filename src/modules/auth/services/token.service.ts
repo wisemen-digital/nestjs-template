@@ -103,6 +103,7 @@ export class TokenService {
         },
         relations: {
           client: true,
+          user: true
         }
       })
 

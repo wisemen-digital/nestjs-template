@@ -44,11 +44,17 @@ export class ClientService {
         where: { uuid: clientId }
       })
 
-      if (client === null || client === undefined) return false
+      if (client === null || client === undefined) {
+        return false
+      }
 
-      if ((secret !== null && secret !== undefined) && client?.secret !== secret) return false
+      if ((secret !== null && secret !== undefined) && client?.secret !== secret) {
+        return false
+      }
 
-      if (client?.scopes?.includes(Scope.ALL)) client.scopes = scopes
+      if (client?.scopes?.includes(Scope.ALL)) {
+        client.scopes = scopes
+      }
 
       client.grants = ['password', 'refresh_token', 'ad']
 

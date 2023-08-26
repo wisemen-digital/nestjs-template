@@ -131,7 +131,6 @@ export class TokenService {
     token.expiresAt = new Date(Date.now() + RefreshToken.lifetime * 1000)
 
     return token.refreshToken
-    // return token as unknown as string
   }
 
   async revokeToken (token: RefreshToken | AccessToken): Promise<boolean> {

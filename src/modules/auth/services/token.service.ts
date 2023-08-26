@@ -107,7 +107,9 @@ export class TokenService {
         }
       })
 
-      if (refreshToken == null) return false
+      if (refreshToken == null) {
+        return false
+      }
 
       return refreshToken
     } catch (e) {

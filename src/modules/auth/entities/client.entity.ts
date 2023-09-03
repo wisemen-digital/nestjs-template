@@ -21,7 +21,6 @@ export class Client {
 
   @Column({ type: 'uuid' })
   @Generated('uuid')
-  @Index()
   secret: string
 
   @Column({ type: 'varchar', nullable: true, array: true })

@@ -47,7 +47,7 @@ export class TokenService {
           uuid: decoded.cid,
           id: decoded.cid,
           scopes: decoded.scope,
-          grants: ['password', 'refresh_token', 'ad']
+          grants: ['password', 'refresh_token']
         },
         accessToken: token,
         accessTokenExpiresAt: new Date(decoded.exp * 1000)

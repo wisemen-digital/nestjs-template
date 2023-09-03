@@ -112,7 +112,7 @@ export class TokenService {
       tid: uuidv4(),
       uid: user.uuid,
       cid: client.uuid,
-      scope
+      scope: scope ?? []
     }
 
     return this.jwtService.sign(payload, {

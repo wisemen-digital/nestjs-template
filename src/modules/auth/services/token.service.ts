@@ -106,6 +106,8 @@ export class TokenService {
   async generateRefreshToken (
     client: Client, user: User, scope: string | string[]
   ): Promise<string> {
+    console.log('scope', scope)
+
     if (typeof scope === 'string') scope = scope.split(' ')
 
     const payload: Omit<RefreshTokenPayload, 'exp'> = {

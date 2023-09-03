@@ -10,6 +10,8 @@ import { PkceService } from './services/pkce.service.js';
 import { TokenService } from './services/token.service.js';
 import { User } from '../users/user.entity.js';
 import { JwtModule } from '@nestjs/jwt';
+import { AuthService } from './auth.service.js';
+import { AuthGuard } from './auth.guard.js';
 
 @Module({
   imports: [
@@ -24,10 +26,15 @@ import { JwtModule } from '@nestjs/jwt';
   ],
   controllers: [AuthController],
   providers: [
+    AuthService,
     ClientService,
     PkceService,
     TokenService,
+    AuthGuard
   ],
+  exports: [
+    AuthService
+  ]
 })
 
 export class AuthModule {}

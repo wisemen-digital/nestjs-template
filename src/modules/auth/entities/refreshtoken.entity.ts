@@ -1,13 +1,31 @@
 import { User } from '../../users/user.entity.js'
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from 'typeorm'
 import { Client } from './client.entity.js'
-import { signToken } from '../../../utils/token.js'
 
-interface JwtPayload {
+export interface RefreshTokenInterface {
+  tid: string
+  uid: string
+  cid: string
+  user: {
+    uuid: string
+    role: string
+  }
+  client: {
+    uuid: string
+    id: string
+    grants: string[]
+    scopes: string[]
+  }
+  refreshToken: string
+  refreshTokenExpiresAt: Date
+}
+
+export interface RefreshTokenPayload {
   tid: string
   uid: string
   cid: string
   scope: string[]
+  exp: number
 }
 
 @Entity()
@@ -16,7 +34,7 @@ export class RefreshToken {
   uuid: string
 
   @CreateDateColumn({ precision: 3 })
-  createdAt!: Date
+  createdAt: Date
 
   @DeleteDateColumn({ precision: 3 })
   deletedAt?: Date
@@ -40,32 +58,4 @@ export class RefreshToken {
   @ManyToOne(() => Client, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'clientUuid' })
   client: Relation<Client>
-
-  get expiresIn (): number {
-    const diff = this.expiresAt.getTime() - Date.now()
-
-    return Math.floor(diff / 1000)
-  }
-
-  get refreshToken (): string {
-    return signToken<JwtPayload>({
-      tid: this.uuid,
-      cid: this.clientUuid,
-      uid: this.userUuid,
-      scope: this.scope
-    }, {
-      expiresIn: this.expiresIn
-    })
-  }
-
-  get refreshTokenExpiresAt (): Date {
-    return this.expiresAt
-  }
-
-  static get lifetime (): number {
-    const value = Number(process.env.REFRESH_TOKEN_LIFETIME)
-
-    if (isNaN(value)) return 365 * 24 * 3600
-    else return value
-  }
 }

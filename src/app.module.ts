@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './modules/users/user.module.js';
-import { sslHelper } from './utils/typeorm.js';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { ConfigModule } from '@nestjs/config'
+import { UserModule } from './modules/users/user.module.js'
+import { sslHelper } from './utils/typeorm.js'
+import { AppController } from './app.controller.js'
+import { AppService } from './app.service.js'
 
 @Module({
   imports: [
@@ -18,13 +18,13 @@ import { AppService } from './app.service.js';
       logging: false,
       synchronize: true,
       migrationsRun: true,
-      autoLoadEntities: true,
+      autoLoadEntities: true
       // entities: mainModels,
       // migrations: mainMigrations
     }),
-    UserModule,
+    UserModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

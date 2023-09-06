@@ -1,4 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
+import { Permissions, Public } from '../permissions/permissions.decorator.js'
+import { Permission } from '../permissions/permission.enum.js'
 import { CreateUserDto } from './dtos/create-user.dto.js'
 import { UpdatePasswordDto } from './dtos/update-password.dto.js'
 import { UpdateUserDto } from './dtos/update-user.dto.js'
@@ -10,6 +12,7 @@ export class UserController {
   constructor (private readonly userService: UserService) {}
 
   @Post()
+  @Public()
   async createUser (
     @Body() createUserDto: CreateUserDto
   ): Promise<UserTransformerType> {
@@ -19,6 +22,7 @@ export class UserController {
   }
 
   @Get()
+  @Permissions(Permission.USER_READ)
   async getUsers (): Promise<UserTransformerType[]> {
     const users = await this.userService.findAll()
 

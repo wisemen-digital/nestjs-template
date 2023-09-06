@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { v4 as uuidv4 } from 'uuid'
-import { RefreshToken, RefreshTokenInterface, RefreshTokenPayload } from '../entities/refreshtoken.entity.js'
 import { Repository } from 'typeorm'
-import { AccessTokenInterface, AccessTokenPayload } from '../entities/accesstoken.entity.js'
-import { Client } from '../entities/client.entity.js'
-import { User } from '../../users/user.entity.js'
 import { JwtService } from '@nestjs/jwt'
+import { RefreshToken, type RefreshTokenInterface, type RefreshTokenPayload } from '../entities/refreshtoken.entity.js'
+import { type AccessTokenInterface, type AccessTokenPayload } from '../entities/accesstoken.entity.js'
+import { type Client } from '../entities/client.entity.js'
+import { type User } from '../../users/user.entity.js'
 
 @Injectable()
 export class TokenService {
   constructor (
     @InjectRepository(RefreshToken)
     private readonly refreshTokenRepository: Repository<RefreshToken>,
-    private jwtService: JwtService
+    private readonly jwtService: JwtService
   ) {}
 
   private parseLifetime (lifetime?: string): number {
@@ -96,7 +96,7 @@ export class TokenService {
         client: refreshToken.client,
         user: refreshToken.user,
         refreshToken: token,
-        refreshTokenExpiresAt: new Date(decoded.exp * 1000),
+        refreshTokenExpiresAt: new Date(decoded.exp * 1000)
       }
     } catch (e) {
       return false

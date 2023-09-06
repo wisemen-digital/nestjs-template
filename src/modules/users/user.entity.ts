@@ -5,11 +5,11 @@ import {
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
-  Relation,
-  UpdateDateColumn,
-} from 'typeorm';
-import { Client } from '../auth/entities/client.entity.js';
-import { RefreshToken } from '../auth/entities/refreshtoken.entity.js';
+  type Relation,
+  UpdateDateColumn
+} from 'typeorm'
+import { Client } from '../auth/entities/client.entity.js'
+import { RefreshToken } from '../auth/entities/refreshtoken.entity.js'
 
 export enum Role {
   ADMIN = 'admin',
@@ -19,29 +19,29 @@ export enum Role {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  uuid: string;
+  uuid: string
 
   @CreateDateColumn({ precision: 3 })
-  createdAt: Date;
+  createdAt: Date
 
   @UpdateDateColumn({ precision: 3 })
-  updatedAt: Date;
+  updatedAt: Date
 
   @Column({ type: 'varchar', unique: true })
   @Index({ unique: true })
-  email: string;
+  email: string
 
   @Column({ type: 'varchar' })
-  password: string;
+  password: string
 
   @Column({ type: 'varchar', nullable: true })
-  firstName: string | null;
+  firstName: string | null
 
   @Column({ type: 'varchar', nullable: true })
-  lastName: string | null;
+  lastName: string | null
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
-  role: Role;
+  role: Role
 
   @OneToMany(() => Client, client => client.user)
   clients?: Array<Relation<Client>>

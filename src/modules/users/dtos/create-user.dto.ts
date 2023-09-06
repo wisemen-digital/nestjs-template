@@ -1,26 +1,26 @@
-import { Optional } from '@nestjs/common';
+import { Optional } from '@nestjs/common'
 import {
   IsEmail,
   IsNotEmpty,
   IsOptional,
   IsString,
-  MinLength,
-} from 'class-validator';
+  MinLength
+} from 'class-validator'
 
 export class CreateUserDto {
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string
 
   @IsString()
   @MinLength(6)
-  password: string;
+  password: string
 
   @Optional()
   @IsString()
-  firstName: string | null;
+  firstName: string | null
 
   @IsOptional()
   @IsString()
-  lastName: string | null;
+  lastName: string | null
 }

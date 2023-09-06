@@ -7,6 +7,8 @@ import { AppController } from './app.controller.js'
 import { AppService } from './app.service.js'
 import { PermissionsGuard } from './modules/permissions/permissions.guard.js'
 import { AuthGuard } from './modules/auth/auth.guard.js'
+import { AuthModule } from './modules/auth/auth.module.js'
+import { UserModule } from './modules/users/user.module.js'
 
 @Module({
   imports: [
@@ -23,7 +25,9 @@ import { AuthGuard } from './modules/auth/auth.guard.js'
       autoLoadEntities: true
       // entities: mainModels,
       // migrations: mainMigrations
-    })
+    }),
+    AuthModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [
@@ -35,7 +39,7 @@ import { AuthGuard } from './modules/auth/auth.guard.js'
     {
       provide: APP_GUARD,
       useClass: PermissionsGuard
-    }
+    },
   ]
 })
 export class AppModule {}

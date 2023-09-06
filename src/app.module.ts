@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './modules/users/user.module.js';
 import { sslHelper } from './utils/typeorm.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+import { UserModule } from './modules/users/user.module.js';
+import { APP_GUARD } from '@nestjs/core';
+import { PermissionsGuard } from './modules/permissions/permissions.guard.js';
+import { AuthGuard } from './modules/auth/auth.guard.js';
 
 @Module({
   imports: [
@@ -22,9 +26,20 @@ import { AppService } from './app.service.js';
       // entities: mainModels,
       // migrations: mainMigrations
     }),
+    AuthModule,
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionsGuard
+    }
+  ],
 })
 export class AppModule {}

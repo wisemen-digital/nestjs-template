@@ -4,12 +4,15 @@ import { UpdatePasswordDto } from './dtos/update-password.dto.js';
 import { UpdateUserDto } from './dtos/update-user.dto.js';
 import { UserService } from './user.service.js';
 import { UserTransformerType, UserTransformer } from './user.transformer.js';
+import { Permissions, Public } from '../permissions/permissions.decorator.js';
+import { Permission } from '../permissions/permission.enum.js';
 
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
+  @Public()
   async createUser(
     @Body() createUserDto: CreateUserDto,
   ): Promise<UserTransformerType> {
@@ -19,6 +22,7 @@ export class UserController {
   }
 
   @Get()
+  @Permissions(Permission.USER_READ)
   async getUsers(): Promise<UserTransformerType[]> {
     const users = await this.userService.findAll();
 

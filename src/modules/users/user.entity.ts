@@ -3,9 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  OneToMany,
   PrimaryGeneratedColumn,
+  Relation,
   UpdateDateColumn,
 } from 'typeorm';
+import { Client } from '../auth/entities/client.entity.js';
+import { RefreshToken } from '../auth/entities/refreshtoken.entity.js';
 
 export enum Role {
   ADMIN = 'admin',
@@ -38,4 +42,10 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
+
+  @OneToMany(() => Client, client => client.user)
+  clients?: Array<Relation<Client>>
+
+  @OneToMany(() => RefreshToken, token => token.user)
+  tokens?: Array<Relation<RefreshToken>>
 }

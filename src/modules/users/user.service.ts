@@ -87,7 +87,7 @@ export class UserService {
       const user = await this.findOneByEmail(email)
       const match = await bcrypt.compare(password, user.password)
 
-      if (match != null) return false
+      if (match == null) return false
 
       return user
     } catch (e) {

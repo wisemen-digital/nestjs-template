@@ -39,7 +39,7 @@ import { UserModule } from './modules/users/user.module.js'
     {
       provide: APP_GUARD,
       useClass: PermissionsGuard
-    },
+    }
   ]
 })
 export class AppModule {}

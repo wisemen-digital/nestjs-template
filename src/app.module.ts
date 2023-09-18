@@ -23,8 +23,6 @@ import { UserModule } from './modules/users/user.module.js'
       synchronize: true,
       migrationsRun: true,
       autoLoadEntities: true
-      // entities: mainModels,
-      // migrations: mainMigrations
     }),
     AuthModule,
     UserModule

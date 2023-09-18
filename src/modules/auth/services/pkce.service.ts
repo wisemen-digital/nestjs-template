@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Pkce } from '../entities/pkce.entity.js'
 import { Repository } from 'typeorm'
+import { Pkce } from '../entities/pkce.entity.js'
 
 @Injectable()
 export class PkceService {

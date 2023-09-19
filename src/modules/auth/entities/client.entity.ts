@@ -1,4 +1,4 @@
-import { User } from '../../users/user.entity.js'
+import { User } from '../../users/entities/user.entity.js'
 import { Column, CreateDateColumn, Entity, Generated, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation, UpdateDateColumn } from 'typeorm'
 
 @Entity()

@@ -2,13 +2,11 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
 import { APP_GUARD } from '@nestjs/core'
-import { sslHelper } from './utils/typeorm.js'
-import { AppController } from './app.controller.js'
-import { AppService } from './app.service.js'
+import { AuthGuard } from './modules/auth/guards/auth.guard.js'
+import { AuthModule } from './modules/auth/modules/auth.module.js'
 import { PermissionsGuard } from './modules/permissions/permissions.guard.js'
-import { AuthGuard } from './modules/auth/auth.guard.js'
-import { AuthModule } from './modules/auth/auth.module.js'
-import { UserModule } from './modules/users/user.module.js'
+import { UserModule } from './modules/users/modules/user.module.js'
+import { sslHelper } from './utils/typeorm.js'
 
 @Module({
   imports: [
@@ -27,9 +25,8 @@ import { UserModule } from './modules/users/user.module.js'
     AuthModule,
     UserModule
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: AuthGuard

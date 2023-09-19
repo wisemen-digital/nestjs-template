@@ -6,7 +6,7 @@ import { JwtService } from '@nestjs/jwt'
 import { RefreshToken, type RefreshTokenInterface, type RefreshTokenPayload } from '../entities/refreshtoken.entity.js'
 import { type AccessTokenInterface, type AccessTokenPayload } from '../entities/accesstoken.entity.js'
 import { type Client } from '../entities/client.entity.js'
-import { type User } from '../../users/user.entity.js'
+import { type User } from '../../users/entities/user.entity.js'
 
 @Injectable()
 export class TokenService {

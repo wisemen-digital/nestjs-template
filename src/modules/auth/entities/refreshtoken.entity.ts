@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from 'typeorm'
-import { User } from '../../users/user.entity.js'
+import { User } from '../../users/entities/user.entity.js'
 import { Client } from './client.entity.js'
 
 export interface RefreshTokenInterface {

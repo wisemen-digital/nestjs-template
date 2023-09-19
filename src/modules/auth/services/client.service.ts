@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { Client } from '../entities/client.entity.js'
-import { User } from '../../users/user.entity.js'
+import { User } from '../../users/entities/user.entity.js'
 
 // todo: remove duplicate code
 export enum Scope {

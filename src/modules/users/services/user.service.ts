@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs'
 import { Injectable } from '@nestjs/common'
-import { type CreateUserDto } from './dtos/create-user.dto.js'
-import { type UpdatePasswordDto } from './dtos/update-password.dto.js'
-import { type UpdateUserDto } from './dtos/update-user.dto.js'
-import { type User } from './user.entity.js'
-import { UserRepository } from './user.repository.js'
+import { type CreateUserDto } from '../dtos/create-user.dto.js'
+import { type UpdatePasswordDto } from '../dtos/update-password.dto.js'
+import { type UpdateUserDto } from '../dtos/update-user.dto.js'
+import { type User } from '../entities/user.entity.js'
+import { UserRepository } from '../repositories/user.repository.js'
 
 @Injectable()
 export class UserService {

@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
-import { Permissions, Public } from '../permissions/permissions.decorator.js'
-import { Permission } from '../permissions/permission.enum.js'
-import { CreateUserDto } from './dtos/create-user.dto.js'
-import { UpdatePasswordDto } from './dtos/update-password.dto.js'
-import { UpdateUserDto } from './dtos/update-user.dto.js'
-import { UserService } from './user.service.js'
-import { type UserTransformerType, UserTransformer } from './user.transformer.js'
+import { Permissions, Public } from '../../permissions/permissions.decorator.js'
+import { Permission } from '../../permissions/permission.enum.js'
+import { CreateUserDto } from '../dtos/create-user.dto.js'
+import { UpdatePasswordDto } from '../dtos/update-password.dto.js'
+import { UpdateUserDto } from '../dtos/update-user.dto.js'
+import { UserService } from '../services/user.service.js'
+import { type UserTransformerType, UserTransformer } from '../transformers/user.transformer.js'
 
 @Controller('users')
 export class UserController {

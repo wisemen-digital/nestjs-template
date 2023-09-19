@@ -6,12 +6,14 @@ export class AccessTokenInterface {
     uuid: string
     role: string
   }
+
   client: {
     uuid: string
     id: string
     grants: string[]
     scopes: string[]
   }
+
   accessToken: string
   accessTokenExpiresAt: Date
 }

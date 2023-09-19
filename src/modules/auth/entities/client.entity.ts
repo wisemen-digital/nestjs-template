@@ -1,5 +1,5 @@
-import { User } from '../../users/entities/user.entity.js'
 import { Column, CreateDateColumn, Entity, Generated, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation, UpdateDateColumn } from 'typeorm'
+import { User } from '../../users/entities/user.entity.js'
 
 @Entity()
 export class Client {

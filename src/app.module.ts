@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/modules/auth.module.js'
 import { PermissionsGuard } from './modules/permissions/permissions.guard.js'
 import { UserModule } from './modules/users/modules/user.module.js'
 import { sslHelper } from './utils/typeorm.js'
+import { RoleGuard } from './modules/auth/guards/role.guard.js'
 
 @Module({
   imports: [
@@ -34,6 +35,10 @@ import { sslHelper } from './utils/typeorm.js'
     {
       provide: APP_GUARD,
       useClass: PermissionsGuard
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard
     }
   ]
 })

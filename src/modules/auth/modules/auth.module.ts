@@ -12,6 +12,10 @@ import { PkceService } from '../services/pkce.service.js'
 import { TokenService } from '../services/token.service.js'
 import { AuthService } from '../services/auth.service.js'
 import { AuthGuard } from '../guards/auth.guard.js'
+import { RefreshTokenRepository } from '../repositories/refresh-token.repository.js'
+import { PkceRepository } from '../repositories/pkce.repository.js'
+import { ClientRepository } from '../repositories/client.repository.js'
+import { UserRepository } from '../../users/repositories/user.repository.js'
 
 @Module({
   imports: [
@@ -36,9 +40,14 @@ import { AuthGuard } from '../guards/auth.guard.js'
     ClientService,
     PkceService,
     TokenService,
-    AuthGuard
+    AuthGuard,
+    UserRepository,
+    RefreshTokenRepository,
+    ClientRepository,
+    PkceRepository
   ],
   exports: [
+    JwtModule,
     AuthService
   ]
 })

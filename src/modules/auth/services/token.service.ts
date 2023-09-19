@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
 import { v4 as uuidv4 } from 'uuid'
-import { Repository } from 'typeorm'
 import { JwtService } from '@nestjs/jwt'
-import { RefreshToken, type RefreshTokenInterface, type RefreshTokenPayload } from '../entities/refreshtoken.entity.js'
+import { type RefreshTokenInterface, type RefreshTokenPayload } from '../entities/refreshtoken.entity.js'
 import { type AccessTokenInterface, type AccessTokenPayload } from '../entities/accesstoken.entity.js'
 import { type Client } from '../entities/client.entity.js'
 import { type User } from '../../users/entities/user.entity.js'
+import { RefreshTokenRepository } from '../repositories/refresh-token.repository.js'
 
 @Injectable()
 export class TokenService {
   constructor (
-    @InjectRepository(RefreshToken)
-    private readonly refreshTokenRepository: Repository<RefreshToken>,
+    private readonly refreshTokenRepository: RefreshTokenRepository,
     private readonly jwtService: JwtService
   ) {}
 

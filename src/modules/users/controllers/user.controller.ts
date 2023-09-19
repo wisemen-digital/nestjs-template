@@ -6,6 +6,7 @@ import { UpdatePasswordDto } from '../dtos/update-password.dto.js'
 import { UpdateUserDto } from '../dtos/update-user.dto.js'
 import { UserService } from '../services/user.service.js'
 import { type UserTransformerType, UserTransformer } from '../transformers/user.transformer.js'
+import { UserValidationPipe } from '../pipes/user.pipe.js'
 
 @Controller('users')
 export class UserController {
@@ -23,14 +24,17 @@ export class UserController {
 
   @Get()
   @Permissions(Permission.USER_READ)
-  async getUsers (): Promise<UserTransformerType[]> {
+  async getUsers (
+  ): Promise<UserTransformerType[]> {
     const users = await this.userService.findAll()
 
     return new UserTransformer().array(users)
   }
 
   @Get(':user')
-  async getUser (@Param('user') userUuid: string): Promise<UserTransformerType> {
+  async getUser (
+    @Param('user', UserValidationPipe) userUuid: string
+  ): Promise<UserTransformerType> {
     const user = await this.userService.findOne(userUuid)
 
     return new UserTransformer().item(user)
@@ -38,7 +42,7 @@ export class UserController {
 
   @Post(':user')
   async updateUser (
-    @Param('user') userUuid: string,
+    @Param('user', UserValidationPipe) userUuid: string,
     @Body() updateUserDto: UpdateUserDto
   ): Promise<UserTransformerType> {
     const user = await this.userService.findOne(userUuid)
@@ -49,7 +53,9 @@ export class UserController {
   }
 
   @Delete(':user')
-  async deleteUser (@Param('user') userUuid: string): Promise<void> {
+  async deleteUser (
+    @Param('user', UserValidationPipe) userUuid: string
+  ): Promise<void> {
     const user = await this.userService.findOne(userUuid)
 
     await this.userService.delete(user.uuid)
@@ -57,7 +63,7 @@ export class UserController {
 
   @Post(':user/password')
   async updateUserPassword (
-    @Param('user') userUuid: string,
+    @Param('user', UserValidationPipe) userUuid: string,
     @Body() updatePasswordDto: UpdatePasswordDto
   ): Promise<void> {
     const user = await this.userService.findOne(userUuid)

@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
-import { APP_GUARD } from '@nestjs/core'
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { AuthGuard } from './modules/auth/guards/auth.guard.js'
 import { AuthModule } from './modules/auth/modules/auth.module.js'
 import { PermissionsGuard } from './modules/permissions/permissions.guard.js'
 import { UserModule } from './modules/users/modules/user.module.js'
 import { sslHelper } from './utils/typeorm.js'
 import { RoleGuard } from './modules/auth/guards/role.guard.js'
+import { ErrorsInterceptor } from './errors.interceptor.js'
 
 @Module({
   imports: [
@@ -39,6 +40,10 @@ import { RoleGuard } from './modules/auth/guards/role.guard.js'
     {
       provide: APP_GUARD,
       useClass: RoleGuard
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ErrorsInterceptor
     }
   ]
 })

@@ -12,9 +12,12 @@ import { ErrorsInterceptor } from './errors.interceptor.js'
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: (process.env.NODE_ENV !== 'test')
+        ? '.env'
+        : `.env.${process.env.NODE_ENV}`
+    }),
     TypeOrmModule.forRoot({
-      name: 'default',
       type: 'postgres',
       url: process.env.TYPEORM_URI,
       ssl: sslHelper(process.env.TYPEORM_SSL),

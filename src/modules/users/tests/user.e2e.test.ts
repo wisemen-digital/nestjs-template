@@ -6,10 +6,10 @@ import bcrypt from 'bcryptjs'
 import { expect } from 'expect'
 import { randEmail, randUuid } from '@ngneat/falso'
 import { AppModule } from '../../../app.module.js'
-import { SeederModule } from '../../../seeder.module.js'
 import { Role } from '../entities/user.entity.js'
 import { UserRepository } from '../repositories/user.repository.js'
 import { UserSeeder } from './user.seeder.js'
+import { UserSeederModule } from './user-seeder.module.js'
 
 describe('Users', async () => {
   let app: INestApplication
@@ -20,7 +20,7 @@ describe('Users', async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [
         AppModule,
-        SeederModule
+        UserSeederModule
       ]
     }).compile()
 
@@ -50,7 +50,7 @@ describe('Users', async () => {
     })
 
     it('should return users', async () => {
-      await userSeeder.createRandomUser({ save: true })
+      await userSeeder.createRandomUser()
 
       const { token } = await userSeeder.setupUser()
 
@@ -105,7 +105,7 @@ describe('Users', async () => {
     it('should return 403 when user is not admin', async () => {
       const { token } = await userSeeder.setupUser()
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .get(`/users/${user.uuid}`)
@@ -117,7 +117,7 @@ describe('Users', async () => {
     it('should return user when user is admin', async () => {
       const { token } = await userSeeder.setupUser(Role.ADMIN)
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .get(`/users/${user.uuid}`)
@@ -147,7 +147,7 @@ describe('Users', async () => {
     })
 
     it('should return 201', async () => {
-      const dto = await userSeeder.createRandomUser()
+      const dto = await userSeeder.createRandomUserDto()
 
       const response = await request(app.getHttpServer())
         .post('/users')
@@ -194,7 +194,7 @@ describe('Users', async () => {
     it('should return 403 when user is not admin', async () => {
       const { token } = await userSeeder.setupUser()
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .post(`/users/${user.uuid}`)
@@ -210,7 +210,7 @@ describe('Users', async () => {
     it('should return 201 when user is admin', async () => {
       const { token } = await userSeeder.setupUser(Role.ADMIN)
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .post(`/users/${user.uuid}`)
@@ -246,7 +246,7 @@ describe('Users', async () => {
     it('should return 403 when user is not admin', async () => {
       const { token } = await userSeeder.setupUser()
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .delete(`/users/${user.uuid}`)
@@ -258,7 +258,7 @@ describe('Users', async () => {
     it('should return 200 when user is admin', async () => {
       const { token } = await userSeeder.setupUser(Role.ADMIN)
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .delete(`/users/${user.uuid}`)
@@ -304,7 +304,7 @@ describe('Users', async () => {
     it('should return 403 when user is not admin', async () => {
       const { token } = await userSeeder.setupUser()
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       const response = await request(app.getHttpServer())
         .post(`/users/${user.uuid}/password`)
@@ -337,7 +337,7 @@ describe('Users', async () => {
     it('should return 201 when admin can change other users password', async () => {
       const { token } = await userSeeder.setupUser(Role.ADMIN)
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       user.password = await bcrypt.hash('password', 10)
 
@@ -357,7 +357,7 @@ describe('Users', async () => {
     it('should return 403 when non-admin user wants to change other users password', async () => {
       const { token } = await userSeeder.setupUser(Role.USER)
 
-      const user = await userSeeder.createRandomUser({ save: true })
+      const user = await userSeeder.createRandomUser()
 
       user.password = await bcrypt.hash('password', 10)
 

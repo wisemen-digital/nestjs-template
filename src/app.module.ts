@@ -13,9 +13,7 @@ import { ErrorsInterceptor } from './errors.interceptor.js'
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: (process.env.NODE_ENV !== 'test')
-        ? '.env'
-        : `.env.${process.env.NODE_ENV}`
+      envFilePath: process.env.ENV_FILE
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

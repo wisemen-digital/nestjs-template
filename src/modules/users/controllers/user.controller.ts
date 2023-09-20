@@ -24,8 +24,7 @@ export class UserController {
 
   @Get()
   @Permissions(Permission.USER_READ)
-  async getUsers (
-  ): Promise<UserTransformerType[]> {
+  async getUsers (): Promise<UserTransformerType[]> {
     const users = await this.userService.findAll()
 
     return new UserTransformer().array(users)

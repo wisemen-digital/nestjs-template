@@ -34,7 +34,7 @@ export class UserValidationPipe implements PipeTransform {
       this.request.auth.user.uuid !== user.uuid &&
       this.request.auth.user.role !== Role.ADMIN
     ) {
-      throw new HttpException('unauthorized', 403)
+      throw new HttpException('forbidden', 403)
     }
 
     return uuid

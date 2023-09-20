@@ -27,12 +27,12 @@ export class UserService {
   }
 
   async findOneByEmail (email: string): Promise<User> {
-    if (email === undefined || email === null) throw new HttpException('missing_parameters', 400)
+    if (email == null) throw new HttpException('missing_parameters', 400)
 
     email = email.toLowerCase()
     const user = await this.userRepository.findOne({ where: { email } })
 
-    if (user === null || user === undefined) throw new HttpException('not_found', 404)
+    if (user == null) throw new HttpException('not_found', 404)
 
     return user
   }

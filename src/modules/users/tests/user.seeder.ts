@@ -30,14 +30,14 @@ export class UserSeeder {
   }> {
     const client = await this.clientSeeder.getTestClient()
 
-    const user = await this.createRandomUser({ save: true }, role)
+    const user = await this.createRandomUser(role)
 
     const token = await this.tokenService.generateAccessToken(client, user, ['read', 'write'])
 
     return { user, client, token }
   }
 
-  async createRandomUser (options?: UserSeederOptions, role?: Role): Promise<User> {
+  async createRandomUser (role?: Role): Promise<User> {
     const password = randPassword()
 
     const user = this.userRepository.create({
@@ -48,9 +48,21 @@ export class UserSeeder {
       role
     })
 
-    if (options?.save === true) {
-      await this.userRepository.save(user)
-    }
+    await this.userRepository.save(user)
+
+    return user
+  }
+
+  async createRandomUserDto (role?: Role): Promise<User> {
+    const password = randPassword()
+
+    const user = this.userRepository.create({
+      email: randEmail(),
+      password: await bcrypt.hash(password, 10),
+      firstName: randFirstName(),
+      lastName: randLastName(),
+      role
+    })
 
     return user
   }

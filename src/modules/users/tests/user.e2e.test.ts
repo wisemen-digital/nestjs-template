@@ -73,7 +73,7 @@ describe('Users', async () => {
     })
 
     it('should return 404 when user not found', async () => {
-      const { token } = await userSeeder.setupUser()
+      const { token } = await userSeeder.setupUser(Role.ADMIN)
 
       const response = await request(app.getHttpServer())
         .get(`/users/${randUuid()}`)
@@ -83,7 +83,7 @@ describe('Users', async () => {
     })
 
     it('should return 400 when invalid uuid', async () => {
-      const { user, token } = await userSeeder.setupUser()
+      const { user, token } = await userSeeder.setupUser(Role.ADMIN)
 
       const response = await request(app.getHttpServer())
         .get(`/users/${user.uuid}s`)
@@ -181,7 +181,7 @@ describe('Users', async () => {
     })
 
     it('should return 404 when user not found', async () => {
-      const { token } = await userSeeder.setupUser()
+      const { token } = await userSeeder.setupUser(Role.ADMIN)
 
       const response = await request(app.getHttpServer())
         .post(`/users/${randUuid()}`)
@@ -234,7 +234,7 @@ describe('Users', async () => {
     })
 
     it('should return 404 when user not found', async () => {
-      const { token } = await userSeeder.setupUser()
+      const { token } = await userSeeder.setupUser(Role.ADMIN)
 
       const response = await request(app.getHttpServer())
         .delete(`/users/${randUuid()}`)
@@ -288,7 +288,7 @@ describe('Users', async () => {
     })
 
     it('should return 404 when user not found', async () => {
-      const { token } = await userSeeder.setupUser()
+      const { token } = await userSeeder.setupUser(Role.ADMIN)
 
       const response = await request(app.getHttpServer())
         .post(`/users/${randUuid()}/password`)

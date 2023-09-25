@@ -1,7 +1,7 @@
 import { Transformer } from '@appwise/transformer'
 import type { User } from '../entities/user.entity.js'
 
-export interface UserTransformerType {
+export class UserTransformerResponse {
   uuid: string
   createdAt: Date
   updatedAt: Date
@@ -11,12 +11,11 @@ export interface UserTransformerType {
   role: string
 }
 
-export interface ExistsTransformerType {
-  exists: boolean
-}
+// export interface UserTransformerType extends UserTransformerResponse {
+// }
 
-export class UserTransformer extends Transformer<User, UserTransformerType> {
-  transform (user: User): UserTransformerType {
+export class UserTransformer extends Transformer<User, UserTransformerResponse> {
+  transform (user: User): UserTransformerResponse {
     return {
       uuid: user.uuid,
       createdAt: user.createdAt,

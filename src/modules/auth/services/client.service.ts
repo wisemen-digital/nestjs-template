@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm'
-import { Client } from '../entities/client.entity.js'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
+import { Client } from '../entities/client.entity.js'
 import { User } from '../../users/user.entity.js'
 
 // todo: remove duplicate code
@@ -26,7 +26,7 @@ export class ClientService {
     if (client.userUuid === undefined) return
 
     if (client.user === undefined) {
-      const user = await this.userRepository.findOneBy({ uuid: client.userUuid})
+      const user = await this.userRepository.findOneBy({ uuid: client.userUuid })
 
       if (user == null) {
         return

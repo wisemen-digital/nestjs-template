@@ -1,22 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { UserService } from '../users/user.service.js';
-import { ClientService, scopes } from './services/client.service.js';
-import { OAuth2Server, createOAuth2 } from '@appwise/oauth2-server';
-import { TokenService } from './services/token.service.js';
-import { Request, Response } from 'express';
-import { AccessTokenInterface } from './entities/accesstoken.entity.js';
+import { Injectable } from '@nestjs/common'
+import { OAuth2Server, createOAuth2 } from '@appwise/oauth2-server'
+import { type Request, type Response } from 'express'
+import { UserService } from '../users/user.service.js'
+import { ClientService, scopes } from './services/client.service.js'
+import { TokenService } from './services/token.service.js'
+import { type AccessTokenInterface } from './entities/accesstoken.entity.js'
 
 @Injectable()
 export class AuthService {
-  private oauth: OAuth2Server
+  private readonly oauth: OAuth2Server
 
-  constructor(
-    private userService: UserService,
-    private clientService: ClientService,
-    private tokenService: TokenService
+  constructor (
+    private readonly userService: UserService,
+    private readonly clientService: ClientService,
+    private readonly tokenService: TokenService
   ) {
     this.oauth = createOAuth2({
-      scopes: scopes,
+      scopes,
       services: {
         userService: this.userService,
         clientService: this.clientService,
@@ -43,5 +43,5 @@ export class AuthService {
     const authres = await this.oauth.authenticate(request, response)
 
     return authres as AccessTokenInterface
-    }
+  }
 }

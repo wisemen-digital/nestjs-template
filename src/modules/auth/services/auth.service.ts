@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { OAuth2Server, createOAuth2 } from '@appwise/oauth2-server'
 import { type Request, type Response } from 'express'
-import { UserService } from '../users/user.service.js'
-import { ClientService, scopes } from './services/client.service.js'
-import { TokenService } from './services/token.service.js'
-import { type AccessTokenInterface } from './entities/accesstoken.entity.js'
+import { UserService } from '../../users/services/user.service.js'
+import { type AccessTokenInterface } from '../entities/accesstoken.entity.js'
+import { ClientService, scopes } from './client.service.js'
+import { TokenService } from './token.service.js'
 
 @Injectable()
 export class AuthService {

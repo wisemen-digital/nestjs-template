@@ -8,8 +8,8 @@ import {
   type Relation,
   UpdateDateColumn
 } from 'typeorm'
-import { Client } from '../auth/entities/client.entity.js'
-import { RefreshToken } from '../auth/entities/refreshtoken.entity.js'
+import { Client } from '../../auth/entities/client.entity.js'
+import { RefreshToken } from '../../auth/entities/refreshtoken.entity.js'
 
 export enum Role {
   ADMIN = 'admin',

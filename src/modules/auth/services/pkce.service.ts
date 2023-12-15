@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
-import { Pkce } from '../entities/pkce.entity.js'
-import { Repository } from 'typeorm'
+import { type Pkce } from '../entities/pkce.entity.js'
+import { PkceRepository } from '../repositories/pkce.repository.js'
 
 @Injectable()
 export class PkceService {
   constructor (
-    @InjectRepository(Pkce)
-    private readonly pkceRepository: Repository<Pkce>
+    private readonly pkceRepository: PkceRepository
   ) {}
 
   async find (uuid: string): Promise<Pkce> {

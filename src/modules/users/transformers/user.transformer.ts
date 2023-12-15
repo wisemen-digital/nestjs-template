@@ -1,5 +1,5 @@
 import { Transformer } from '@appwise/transformer'
-import type { User } from './user.entity.js'
+import type { User } from '../entities/user.entity.js'
 
 export interface UserTransformerType {
   uuid: string

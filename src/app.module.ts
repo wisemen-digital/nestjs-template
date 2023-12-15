@@ -1,20 +1,21 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
-import { APP_GUARD } from '@nestjs/core'
-import { sslHelper } from './utils/typeorm.js'
-import { AppController } from './app.controller.js'
-import { AppService } from './app.service.js'
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
+import { AuthGuard } from './modules/auth/guards/auth.guard.js'
+import { AuthModule } from './modules/auth/modules/auth.module.js'
 import { PermissionsGuard } from './modules/permissions/permissions.guard.js'
-import { AuthGuard } from './modules/auth/auth.guard.js'
-import { AuthModule } from './modules/auth/auth.module.js'
-import { UserModule } from './modules/users/user.module.js'
+import { UserModule } from './modules/users/modules/user.module.js'
+import { sslHelper } from './utils/typeorm.js'
+import { RoleGuard } from './modules/auth/guards/role.guard.js'
+import { ErrorsInterceptor } from './errors.interceptor.js'
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: process.env.ENV_FILE
+    }),
     TypeOrmModule.forRoot({
-      name: 'default',
       type: 'postgres',
       url: process.env.TYPEORM_URI,
       ssl: sslHelper(process.env.TYPEORM_SSL),
@@ -23,15 +24,12 @@ import { UserModule } from './modules/users/user.module.js'
       synchronize: true,
       migrationsRun: true,
       autoLoadEntities: true
-      // entities: mainModels,
-      // migrations: mainMigrations
     }),
     AuthModule,
     UserModule
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: AuthGuard
@@ -39,6 +37,14 @@ import { UserModule } from './modules/users/user.module.js'
     {
       provide: APP_GUARD,
       useClass: PermissionsGuard
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ErrorsInterceptor
     }
   ]
 })

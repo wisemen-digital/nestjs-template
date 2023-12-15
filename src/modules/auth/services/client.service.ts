@@ -1,8 +1,8 @@
-import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
-import { Client } from '../entities/client.entity.js'
-import { User } from '../../users/user.entity.js'
+import { type Client } from '../entities/client.entity.js'
+import { type User } from '../../users/entities/user.entity.js'
+import { ClientRepository } from '../repositories/client.repository.js'
+import { UserRepository } from '../../users/repositories/user.repository.js'
 
 // todo: remove duplicate code
 export enum Scope {
@@ -16,10 +16,8 @@ export const scopes = Object.values(Scope)
 @Injectable()
 export class ClientService {
   constructor (
-    @InjectRepository(Client)
-    private readonly clientRepository: Repository<Client>,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>
+    private readonly clientRepository: ClientRepository,
+    private readonly userRepository: UserRepository
   ) {}
 
   async getUserFromClient (client: Client): Promise<User | undefined> {

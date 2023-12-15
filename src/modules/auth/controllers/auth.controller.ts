@@ -1,13 +1,13 @@
 import { Controller, Post, Req, Res } from '@nestjs/common'
-import { AuthTransformer } from './auth.transformer.js'
 import { Request, Response } from 'express'
-import { AuthService } from './auth.service.js'
-import { Public } from '../permissions/permissions.decorator.js'
+import { Public } from '../../permissions/permissions.decorator.js'
+import { AuthTransformer } from '../transformers/auth.transformer.js'
+import { AuthService } from '../services/auth.service.js'
 
 @Controller('auth')
 export class AuthController {
   constructor (
-    private readonly authService: AuthService,
+    private readonly authService: AuthService
   ) { }
 
   @Post()

@@ -102,7 +102,7 @@ export class TokenService {
   async generateRefreshToken (
     client: Client, user: User, scope: string[]
   ): Promise<string> {
-    if (typeof scope === 'string') scope = scope.split(' ')
+    if (typeof scope === 'string') scope = (scope as string).split(' ')
 
     const payload: Omit<RefreshTokenPayload, 'exp'> = {
       tid: uuidv4(),

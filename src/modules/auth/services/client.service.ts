@@ -46,7 +46,7 @@ export class ClientService {
         return false
       }
 
-      if (secret == null && client?.secret !== secret) {
+      if (secret != null && client?.secret !== secret) {
         return false
       }
 

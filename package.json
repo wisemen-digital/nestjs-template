@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@appwise/oauth2-server": "^0.0.20",
+    "@appwise/oauth2-server": "^0.1.0",
     "@appwise/transformer": "^0.0.2",
     "@nestjs/common": "^10.2.4",
     "@nestjs/config": "^3.0.1",

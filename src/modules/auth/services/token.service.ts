@@ -56,10 +56,8 @@ export class TokenService {
   }
 
   async generateAccessToken (
-    client: Client, user: User, scope: string | string[]
+    client: Client, user: User, scope: string[]
   ): Promise<string> {
-    if (typeof scope === 'string') scope = scope.split(' ')
-
     const payload: Omit<AccessTokenPayload, 'exp'> = {
       uid: user.uuid,
       cid: client.uuid,
@@ -102,7 +100,7 @@ export class TokenService {
   }
 
   async generateRefreshToken (
-    client: Client, user: User, scope: string | string[]
+    client: Client, user: User, scope: string[]
   ): Promise<string> {
     if (typeof scope === 'string') scope = scope.split(' ')
 

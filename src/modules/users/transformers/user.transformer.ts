@@ -1,9 +1,10 @@
 import { Transformer } from '@appwise/transformer'
 import { ApiProperty } from '@nestjs/swagger'
+import { Role } from '../entities/user.entity.js'
 import type { User } from '../entities/user.entity.js'
 
 export class UserTransformerType {
-  @ApiProperty()
+  @ApiProperty({ type: String, format: 'uuid' })
   uuid: string
 
   @ApiProperty()
@@ -21,8 +22,8 @@ export class UserTransformerType {
   @ApiProperty({ type: String, nullable: true })
   lastName: string | null
 
-  @ApiProperty()
-  role: string
+  @ApiProperty({ enum: Role })
+  role: Role
 }
 
 export interface ExistsTransformerType {

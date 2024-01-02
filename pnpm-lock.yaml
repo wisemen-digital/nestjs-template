@@ -40,6 +40,12 @@ dependencies:
   '@sentry/node':
     specifier: ^7.91.0
     version: 7.91.0
+  '@sentry/tracing':
+    specifier: ^7.91.0
+    version: 7.91.0
+  '@sentry/types':
+    specifier: ^7.91.0
+    version: 7.91.0
   bcryptjs:
     specifier: ^2.4.3
     version: 2.4.3

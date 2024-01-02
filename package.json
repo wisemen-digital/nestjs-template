@@ -19,7 +19,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "pnpm clean && pnpm build && node -r dotenv/config ./node_modules/typeorm/cli -d ./dist/src/config/sql/sources/main.js"
   },
   "dependencies": {
     "@appwise/express-dto-router": "^1.1.5",
@@ -60,6 +61,7 @@
     "@types/uuid": "^9.0.3",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
+    "dotenv": "^16.3.1",
     "eslint": "^8.48.0",
     "eslint-config-appwise": "^1.0.9",
     "eslint-config-standard": "^17.1.0",

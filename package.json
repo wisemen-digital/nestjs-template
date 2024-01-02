@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@appwise/express-dto-router": "^1.1.5",
-    "@appwise/oauth2-server": "^0.1.0",
+    "@appwise/oauth2-server": "^0.0.10",
     "@appwise/transformer": "^0.0.2",
     "@nestjs/common": "^10.2.4",
     "@nestjs/config": "^3.0.1",
@@ -30,6 +30,7 @@
     "@nestjs/jwt": "^10.1.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.2.4",
+    "@nestjs/swagger": "^7.1.17",
     "@nestjs/typeorm": "^10.0.0",
     "@ngneat/falso": "^7.1.0",
     "@sentry/node": "^7.91.0",

@@ -36,7 +36,7 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: 'easy_2_drop'
+          POSTGRES_DB: 'test_db'
           POSTGRES_USER: 'postgres'
           POSTGRES_PASSWORD: 'password'
           POSTGRES_HOST_AUTH_METHOD: trust

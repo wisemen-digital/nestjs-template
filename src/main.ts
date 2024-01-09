@@ -28,8 +28,8 @@ async function bootstrap (): Promise<void> {
   app.enableCors()
 
   const config = new DocumentBuilder()
-    .setTitle('Easy2Drop API')
-    .setDescription('The Easy2Drop API description')
+    .setTitle('API Documentation')
+    .setDescription('The API documentation description')
     .setVersion('1.0')
     .build()
   const document = SwaggerModule.createDocument(app, config)

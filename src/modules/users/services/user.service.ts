@@ -70,7 +70,7 @@ export class UserService {
 
     const match = await bcrypt.compare(dto.oldPassword, user.password)
 
-    if (match === false) {
+    if (!match) {
       throw new HttpException('invalid_credentials', 401)
     }
 
@@ -87,9 +87,9 @@ export class UserService {
   async verify (email: string, password: string): Promise<User | false> {
     try {
       const user = await this.findOneByEmail(email)
-      const match = await bcrypt.compare(password, user.password)
+      const match = await bcrypt.compare(password, user.password ?? '')
 
-      if (match == null) return false
+      if (!match) return false
 
       return user
     } catch (e) {
